@@ -102,6 +102,7 @@ function is_palindrome(s) {
 
 // problemOneAndTwo();
 
+//4.
 function matchParenthesis(e){
   e.toString();
   let parensStack = new Stack;
@@ -184,12 +185,100 @@ function matchParenthesis(e){
 }
 
 // const parensTestString = 'for(let i = e.length-1; i>=0; i--){if(e[i] === \'(\' || e[i] === \')\'){    parensStack.push(e[i]);  }      }';
-const simpleParensTest = '(([{[]]))';
+// const simpleParensTest = '(([ { [] ]))';
 
 // matchParenthesis(parensTestString);
-try{
-  console.log(matchParenthesis(simpleParensTest));
-} catch(e){
-  console.log(e.message);
+// try{
+//   console.log(matchParenthesis(simpleParensTest));
+// } catch(e){
+//   console.log(e.message);
+// }
+
+//5.
+//demoed in class
+
+//6.
+class Queue {
+  constructor(){
+    this.first = null;
+    this.last = null;
+  }
+
+  enqueue(data){
+    const node = new _Node(data,null);
+    if(this.first === null){
+      this.first = node;
+    }
+
+    if(this.last){
+      this.last.next = node;
+    }
+
+    this.last = node;
+
+  }
+
+  dequeue(){
+    if(this.first === null){
+      return;
+    }
+    const node = this.first;
+    this.first = this.first.next;
+    if(node === this.last){
+      this.last = null;
+    }
+    return node.value;
+  }
 }
+
+function peek(queue){
+  if(queue.first){
+    return queue.first.value
+  }
+  else return 'empty queue'
+}
+
+function isEmpty(queue){
+  if(queue.first){
+    return false
+  }
+  return true
+}
+
+function display(queue){
+  if(queue.first === null){
+    console.log('empty queue')
+    return;
+  }
+
+  let node = queue.first
+  while(node !== queue.last){
+    console.log(node.value)
+    node=node.next
+  }
+  console.log(node.value)
+}
+
+function problemSix(){
+  let starTrekQ = new Queue;
+
+  starTrekQ.enqueue('Kirk');
+  starTrekQ.enqueue('Spock');
+  starTrekQ.enqueue('Uhura');
+  starTrekQ.enqueue('Sulu');
+  starTrekQ.enqueue('Checkov');
+
+  display(starTrekQ)
+  console.log('-------------')
+
+  starTrekQ.dequeue()
+  starTrekQ.dequeue()
+
+  display(starTrekQ)
+  console.log('-------------')
+}
+
+problemSix()
+
+
 
